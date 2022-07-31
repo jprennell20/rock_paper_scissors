@@ -44,6 +44,8 @@ function isLoser(computerSelectionUPPER,playerSelectionUPPER){
 }
 
 function playRound(playerSelection, computerSelection) {
+
+
     // Standardize Value Format
     let computerSelectionUPPER = computerSelection.toUpperCase();
     let playerSelectionUPPER = playerSelection.toUpperCase();
@@ -51,12 +53,13 @@ function playRound(playerSelection, computerSelection) {
     // Generate Standard Response Messages
     let winnerMessage = `You Win! ${playerSelection} beats ${computerSelection}`;
     let loserMessage = `You Lose! ${computerSelection} beats ${playerSelection}`;
+    let tieMessage = `It's a tie! You both selected: ${playerSelection}`
 
     // Determine the winner
     switch(true){
         // User ties computer 
         case(playerSelectionUPPER === computerSelectionUPPER):
-            return `It's a tie! You both selected: ${playerSelection}`;
+            return tieMessage;
 
         // User beats computer
         case(isWinner(playerSelectionUPPER, computerSelectionUPPER) == true):
@@ -72,14 +75,29 @@ function playRound(playerSelection, computerSelection) {
     }
   }
 
+function game(){
+    let userScore = 0;
+    let computerScore = 0;
+    for(let i = 0; i < 5; i++){
+        // Prompt User for Input
+        let playerSelection = prompt('Rock, Paper, or Scissors?');
 
-// Prompt User for Input
-let playerSelection = prompt('Rock, Paper, or Scissors?')
+        // Call function to get computer selection
+        const computerSelection = getComputerChoice();
 
-// Call function to get computer selection
-const computerSelection = getComputerChoice();
+        let result = playRound(playerSelection,computerSelection);
 
-// Log Result
-console.log(playerSelection);
-console.log(computerSelection);
-console.log(playRound(playerSelection, computerSelection));
+        if (result.search("Win") != -1){
+            userScore++;
+        }else if(result.search("Lose") != -1){
+            computerScore++;
+        }
+        // Log Result
+        console.log(playerSelection);
+        console.log(computerSelection);
+        console.log(playRound(playerSelection, computerSelection));
+        console.log(`User: ${userScore} vs Computer: ${computerScore}`)
+    }
+}
+
+game();
