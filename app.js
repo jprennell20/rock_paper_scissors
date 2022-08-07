@@ -3,6 +3,17 @@ const choices = ["Rock","Paper","Scissors"]
 let userScore = 0;
 let computerScore = 0;
 
+function resetGame(){
+    userScore = 0;
+    computerScore = 0;
+
+    let userScoreDisplay = document.getElementById('user-score');
+    userScoreDisplay.textContent = `User: ${userScore}`;
+
+    let compScoreDisplay = document.getElementById('comp-score');
+    compScoreDisplay.textContent = `Computer: ${computerScore}`;
+}
+
 // Function to get the computers selection
 function getComputerChoice(){
     // Randomize selection based on collection size
@@ -107,9 +118,11 @@ function playRound(playerSelection, computerSelection) {
     }
 
     if(userScore >= 5){
-        alert("You've Defeated the Computer!!")
+        alert("You've Defeated the Computer!!");
+        resetGame();
     }else if(computerScore >= 5){
         alert("You've Been Crushed by The Computer...");
+        resetGame();
     }
   }
 
